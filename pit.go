@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/typester/go-pit"
+	"github.com/mash/go-pit"
 )
 
 func pitToken(user string) string {
