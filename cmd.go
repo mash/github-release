@@ -16,6 +16,9 @@ func infocmd(opt Options) error {
 	user := nvls(opt.Info.User, EnvUser)
 	repo := nvls(opt.Info.Repo, EnvRepo)
 	token := nvls(opt.Info.Token, EnvToken)
+	if token == "" {
+		token = pitToken(user)
+	}
 	tag := opt.Info.Tag
 
 	if user == "" || repo == "" {
@@ -88,6 +91,9 @@ func uploadcmd(opt Options) error {
 	user := nvls(opt.Upload.User, EnvUser)
 	repo := nvls(opt.Upload.Repo, EnvRepo)
 	token := nvls(opt.Upload.Token, EnvToken)
+	if token == "" {
+		token = pitToken(user)
+	}
 	tag := opt.Upload.Tag
 	name := opt.Upload.Name
 	file := opt.Upload.File
@@ -145,6 +151,9 @@ func downloadcmd(opt Options) error {
 	user := nvls(opt.Download.User, EnvUser)
 	repo := nvls(opt.Download.Repo, EnvRepo)
 	token := nvls(opt.Download.Token, EnvToken)
+	if token == "" {
+		token = pitToken(user)
+	}
 	tag := opt.Download.Tag
 	name := opt.Download.Name
 
@@ -243,6 +252,9 @@ func releasecmd(opt Options) error {
 	user := nvls(cmdopt.User, EnvUser)
 	repo := nvls(cmdopt.Repo, EnvRepo)
 	token := nvls(cmdopt.Token, EnvToken)
+	if token == "" {
+		token = pitToken(user)
+	}
 	tag := cmdopt.Tag
 	name := nvls(cmdopt.Name, tag)
 	desc := nvls(cmdopt.Desc, tag)
@@ -303,6 +315,9 @@ func editcmd(opt Options) error {
 	user := nvls(cmdopt.User, EnvUser)
 	repo := nvls(cmdopt.Repo, EnvRepo)
 	token := nvls(cmdopt.Token, EnvToken)
+	if token == "" {
+		token = pitToken(user)
+	}
 	tag := cmdopt.Tag
 	name := nvls(cmdopt.Name, tag)
 	desc := nvls(cmdopt.Desc, tag)
@@ -370,6 +385,9 @@ func deletecmd(opt Options) error {
 		nvls(opt.Delete.Repo, EnvRepo),
 		nvls(opt.Delete.Token, EnvToken),
 		opt.Delete.Tag
+	if token == "" {
+		token = pitToken(user)
+	}
 	vprintln("deleting...")
 
 	id, err := IdOfTag(user, repo, tag, token)
